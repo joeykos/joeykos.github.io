@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jhoto</title>
+  <meta name="description" content="Jhoto - Real estate photography and iGUIDE tours in Vancouver.">
+  <link rel="icon" href="favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="icon" href="favicon-512.png" sizes="512x512" type="image/png">
+  <link rel="apple-touch-icon" href="favicon-192.png">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #f9f5ec;
+      font-family: 'Georgia', serif;
+      color: #3b3b3b;
+      background-image: url('paper-fibers.png');
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    header {
+      background-color: #e6dccd;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #c4b89b;
+    }
+    header img {
+      max-width: 100px;
+      height: auto;
+      margin-right: 20px;
+    }
+    .header-text h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    .tagline {
+      font-style: italic;
+      font-size: 1.2em;
+      margin-top: 5px;
+    }
+	.about-section {
+	  padding: 40px 20px 20px;
+	  text-align: center;
+	}
+	.about-section h2 {
+	  font-size: 1.8em;
+	  margin-bottom: 10px;
+	}
+	.about-section p {
+	  font-size: 1.1em;
+	  max-width: 700px;
+	  margin: 0 auto;
+	  line-height: 1.5;
+	}
+    .section-header {
+      text-align: center;
+      padding-top: 30px;
+    }
+    .section-header h2 {
+	  font-size: 1.8em;
+    }
+	.carousel {
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: center;
+	  align-items: center;
+	  padding: 20px;
+	  gap: 4px;
+	}
+	.carousel-arrow {
+	  font-size: 2em;
+	  background: none;
+	  border: none;
+	  cursor: pointer;
+	  color: #3b3b3b;
+	  padding: 10px;
+	}
+	.carousel-arrow:focus {
+	  outline: none !important;
+	  box-shadow: none !important;
+	}
+	.carousel img {
+	  width: 90%;
+	  max-width: 717px;
+	  border: 5px solid #ddd4c4;
+	  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	}
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+	  gap: 20px;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+	.lightbox-arrow {
+	  font-size: 2em;
+	  background: none;
+	  border: none;
+	  color: white;
+	  cursor: pointer;
+	  padding: 20px;
+	  z-index: 1001;
+	  transition: background 0.2s ease;
+	  border-radius: 50%;
+	}
+	.lightbox-arrow:hover {
+	  background: rgba(255, 255, 255, 0.1); /* subtle hover feedback */
+	}
+    .iguide-section {
+      text-align: center;
+      padding: 30px 20px;
+    }
+	.iguide-section h2 {
+	  font-size: 1.8em;
+	  margin-bottom: 20px;
+    }
+	.iframe-container {
+	  position: relative;
+	  width: 100%;
+	  max-width: 956px;
+	  aspect-ratio: 956 / 548;
+	  margin: 0 auto;
+	  overflow: hidden;
+	}
+	.iframe-container iframe {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  border: 5px solid #ddd4c4;
+	  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+	}
+    footer {
+      background-color: #e6dccd;
+      border-top: 2px solid #c4b89b;
+      font-size: 0.9em;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .footer-flex {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: stretch;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    .footer-pricing,
+    .footer-contact {
+      flex: 1 1 250px;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .footer-center {
+      flex: 1 1 250px;
+	  display: flex;
+	  align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 20px;
+      order: 0;
+    }
+
+	@media (max-width: 1024px) {
+	
+	}
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+      }
+      header img {
+        max-width: 80px;
+        margin: 0 0 10px 0;
+      }
+      .header-text h1 {
+        font-size: 1.8em;
+      }
+      .tagline {
+        font-size: 1em;
+      }
+      .footer-center {
+        order: 1;
+      }
+      .footer-pricing {
+        order: 2;
+      }
+      .footer-contact {
+        order: 3;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="jhotologo.png" alt="Jhoto Logo">
+    <div class="header-text">
+      <h1>Jhoto</h1>
+      <div class="tagline">Real estate photography</div>
+    </div>
+  </header>
+  
+  <section class="about-section">
+    <div class="about-container">
+      <h2>About</h2>
+      <p>Flash-ambient real estate photography and iGUIDE 3D virtual tours with floor plans in Vancouver.
+	   Next-day delivery, and first-time clients receive 25% off. Package pricing and contact information
+	    found below. Services are also available individually.</p>
+    </div>
+  </section>
+
+  <section class="section-header">
+    <h2>Sample Photos</h2>
+  </section>
+
+  <section class="carousel">
+    <button id="prevBtn" class="carousel-arrow">‹</button>
+    <img class="carousel-image" src="examplephoto1.webp" alt="Real estate photo">
+    <button id="nextBtn" class="carousel-arrow">›</button>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <button id="lightboxPrev" class="lightbox-arrow">‹</button>
+    <img src="" alt="Enlarged Image">
+	<button id="lightboxNext" class="lightbox-arrow">›</button>
+  </div>
+
+  <section class="iguide-section">
+    <h2>Sample iGUIDE Tour</h2>
+    <div class="iframe-container">
+      <iframe 
+        src="https://youriguide.com/api-docs-sample?mute=1&unbranded=1&bgcolor=FFFFFF" 
+        allowfullscreen 
+        loading="lazy">
+      </iframe>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-flex">
+      <div class="footer-pricing">
+        <h3>Package Pricing</h3>
+        <p><strong>$270</strong> for under 1,000 sq ft</p>
+        <p><strong>+$70</strong> per additional 500 sq ft</p>
+      </div>
+
+      <div class="footer-center">
+        <p style="margin: 0; font-weight: bold;">Flash photography + iGUIDE 3D tour & floor plan</p>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:joey@jhoto.ca">joey@jhoto.ca</a></p>
+        <p>Phone: <a href="tel:2508959639">(250) 895-9639</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+	const carouselImg = document.querySelector('.carousel-image');
+	document.querySelector('.carousel-image').addEventListener('click', () => {
+	  lightboxImg.src = carouselImg.src;
+	  lightbox.style.display = 'flex';
+	});
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+
+    // Carousel logic
+    const carouselImages = [
+      'examplephoto1.webp',
+      'examplephoto2.webp',
+      'examplephoto3.webp',
+	  'examplephoto4.webp',
+	  'examplephoto5.webp',
+	  'examplephoto6.webp'
+    ];
+    let currentIndex = 0;
+	
+	function updateCarouselImage() {
+	  carouselImg.src = carouselImages[currentIndex];
+	  if (lightbox.style.display === 'flex') {
+		lightboxImg.src = carouselImages[currentIndex];
+	  }
+	}
+	
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+      updateCarouselImage();
+	  e.currentTarget.blur();
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % carouselImages.length;
+      updateCarouselImage();
+	  e.currentTarget.blur();
+    });
+	document.getElementById('lightboxPrev').addEventListener('click', (e) => {
+	  e.stopPropagation(); // don't close lightbox
+	  currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+	  updateCarouselImage();
+	  e.currentTarget.blur();
+	});
+	document.getElementById('lightboxNext').addEventListener('click', (e) => {
+	  e.stopPropagation(); // don't close lightbox
+	  currentIndex = (currentIndex + 1) % carouselImages.length;
+	  updateCarouselImage();
+	  e.currentTarget.blur();
+	});
+	
+	// Swipe Nav
+	let touchStartX = 0;
+    let touchEndX = 0;
+
+	carouselImg.addEventListener('touchstart', (e) => {
+	  touchStartX = e.changedTouches[0].screenX;
+	});
+
+	carouselImg.addEventListener('touchend', (e) => {
+	  touchEndX = e.changedTouches[0].screenX;
+	  handleSwipe();
+	});
+
+	function handleSwipe() {
+	  const swipeThreshold = 50; // px
+	  if (touchEndX < touchStartX - swipeThreshold) {
+		// swipe left
+		currentIndex = (currentIndex + 1) % carouselImages.length;
+		updateCarouselImage();
+	  }
+	  if (touchEndX > touchStartX + swipeThreshold) {
+		// swipe right
+		currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+		updateCarouselImage();
+	  }
+	}
+	
+	// Swipe Nav
+	let lightboxStartX = 0;
+	let lightboxEndX = 0;
+
+	lightboxImg.addEventListener('touchstart', (e) => {
+	  lightboxStartX = e.changedTouches[0].screenX;
+	});
+
+	lightboxImg.addEventListener('touchend', (e) => {
+	  lightboxEndX = e.changedTouches[0].screenX;
+	  handleLightboxSwipe();
+	});
+
+	function handleLightboxSwipe() {
+	  const swipeThreshold = 50;
+	  if (lightboxEndX < lightboxStartX - swipeThreshold) {
+		currentIndex = (currentIndex + 1) % carouselImages.length;
+		updateCarouselImage();
+	  }
+	  if (lightboxEndX > lightboxStartX + swipeThreshold) {
+		currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+		updateCarouselImage();
+	  }
+	}
+	
+	// Keyboard Nav
+	document.addEventListener('keydown', (e) => {
+	  if (e.key === 'ArrowLeft') {
+		currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+		updateCarouselImage();
+	  }
+	  if (e.key === 'ArrowRight') {
+		currentIndex = (currentIndex + 1) % carouselImages.length;
+		updateCarouselImage();
+	  }
+	});
+
+  </script>
+</body>
+</html>
